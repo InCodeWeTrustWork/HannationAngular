@@ -1,0 +1,8 @@
+<div class="container">
+	<div class="jumbotron" ng-repeat="post in posts">
+	  <h1>{{post.title}}</h1>
+	  <p>{{post.content | limitHtml}}</p>
+	  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+	</div>
+		
+</div>

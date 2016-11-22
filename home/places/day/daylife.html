@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="jumbotron" >
+	  <h1></h1>
+	  <p>{{post.content | limitHtml}}</p>
+	  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+	</div>
+		
+</div>
+
+
+<div class="card-columns">
+			  <div class="card" ng-repeat="post in posts">
+		      	<a href="http://hannation.me/halloween-party-in-manhattan/" title="Hallonhattan">
+		              <img width="800" height="500" ng-src="">		              </a>
+		            		    <div class="card-block">
+		      <h3><a class="events_place" href="http://hannation.me/halloween-party-in-manhattan/" rel="bookmark">{{post.title}}</a></h3>
+		       <hr>
+		       <h3><i class="fa fa-calendar"></i>Sun/30/10</h3>  
+		       <p> <i class="fa fa-map-marker"></i>Manhattan</p>
+		    </div>
+		       <a class="full_button" href="http://hannation.me/halloween-party-in-manhattan/" rel="bookmark">View more</a>
+  			</div>
+  				</div>

@@ -1,0 +1,115 @@
+<div class="container">
+<div class="col-md-3">
+	<div class="text-xs-center profile-block">
+	  <img class="card-img-top"  ng-src="http://localhost:8080/home/profile/iceland.jpg" alt="Card image cap">
+	  <img class="avatar" ng-src="{{user.avatar}}">
+	  <div class="bottom">
+	  	 <h5>{{user.displayname}}</h5>
+	  	 <p>{{user.description}}</p>
+	  	 <ul>
+	  	 	<li> 
+		  	 	<a data-target="#View_friends" data-toggle="modal">Friends</a>
+		  	 	<h5>{{count}}</h5>
+	  	 	</li>
+	  	 </ul>
+	  	 <div class="friendship" style="display:">
+	  	 <button class="btn" ng-click="Follow()">Follow</button>
+	  	 <button class="btn" ng-click="AddToFriend(friend)">Add to friend</button>
+	  	 <button class="btn" ng-click="Unfollow()">Unfollow</button>
+	  	 <button class="btn" ng-click="Unfriend()">Unfollow</button>
+	  	 </div>
+	  </div>
+	</div>
+
+
+	<div class="card">
+		<h5 style="font-size: 14px;">About <small>· edit</small></h5>
+		<ul>
+		<li class="fullname">{{user_meta.first_name}}</li>
+		<li class="location">{{user_meta.city}}</li>
+		<li class="wechat">{{user_meta.wechat_id}}</li>
+		<li class="email">{{user_meta.email}}</li>
+		<li class="birthday">{{user_meta.birthday}}</li>
+		</ul>
+	</div>
+</div>
+   
+
+
+
+
+<div class="col-md-6">
+	<div class="card" style="padding: 0;">
+	
+		<div class="preview">
+			 <img ng-if="img" style="width: 100%;" class="thumbnail animated fadeIn" ng-src="{{img}}">
+		</div>
+		<div class="moments" ng-repeat="activity in activities" style="padding: 20px;">
+			<a href="#"><img class="moment-avatar" ng-src="{{activity.user.avatar}}"></a>
+			<div class="content">
+				<div class="author btn-group">
+				
+			
+					<small>{{activity.time_since}}</small>
+					<h5>{{activity.user.display_name}}</h5>
+				</div>
+				<p class="moment" ng-bind-html="activity.content | limitHtml2 | limitHtml3"></p>
+				<ul ng-repeat="comment in activity.comments">
+					<li>	
+						<a href="#">
+						<img class="comment-avatar" ng-src="{{comment.avatar}}">
+						</a>
+						<p class="comment-moment">
+							<strong>{{activity.user.display_name}} :</strong>  {{comment.content}}
+						</p>
+					</li>
+				</ul>
+				<div class="add-new-comment">
+					<div class="form-group" style="padding: 0;">
+					  <div class="input-group">
+					    <input type="text" class="form-control" ng-model='new_comment'>
+					    <span class="input-group-btn">
+					     <button class="btn btn-default btn-add" ng-if='new_comment' ng-click="addComment(activity.activity_id)" type="button"><i class="fa fa-plus"></i></button>
+					    </span>
+					 </div>
+				  </div>
+				</div>
+			</div>	
+			<div class="moment-footer">
+				<button class="btn btn-success" ng-click='Add2Favorite(activity.activity_id)'><i class="fa fa-heart-o"></i> {{activity.fav_count}}</button>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+
+<!-MODALS>
+<!-- Modal -->
+<div class="modal fade" id="View_friends" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Friends</h4>
+      </div>
+      <div class="modal-body">
+		<ul class="list-group" ng-repeat="friend in friends">
+			<li class="custom_li">
+				<div class="friend_item">
+					<a href="#"><img ng-src="{{friend.avatar}}" alt="" class="comment-avatar"></a>
+					<div class="friend_info">
+						<strong>{{friend.username}}</strong>
+					</div>
+				</div>
+			</li>
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-MODALS>
+</div>

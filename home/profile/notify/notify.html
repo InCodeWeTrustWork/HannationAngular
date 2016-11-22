@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="col-md-3">
+		<div class="text-xs-center profile-block">
+		  <img class="card-img-top"  ng-src="http://localhost:8080/home/profile/iceland.jpg" alt="Card image cap">
+		  <img class="avatar" ng-src="{{user.avatar}}">
+		  <div class="bottom">
+		  	 <h5>{{user.displayname}}</h5>
+		  	 <p>{{user.description}}</p>
+		  	 <ul>
+		  	 	<li> 
+			  	 	<a data-target="#View_friends" data-toggle="modal">Friends</a>
+			  	 	<h5>{{count}}</h5>
+		  	 	</li>
+		  	 </ul>
+		  </div>
+		</div>
+
+
+		<div class="card">
+			<h5 style="font-size: 14px;">About <small>· edit</small></h5>
+			<ul>
+			<li class="fullname">{{info.first_name}}</li>
+			<li class="location">{{info.city}}</li>
+			<li class="wechat">{{info.wechat_id}}</li>
+			<li class="email">{{info.email}}</li>
+			<li class="birthday">{{info.birthday}}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card" style="padding: 0;">
+			<ul class="list-group" >
+				<li class="notif-header">
+					<h3 class="alc">Notifications</h3>
+				</li>
+				<li class="notify" ng-repeat="notif in notifications">
+					<img ng-src="{{notif.sender_avatar}}" class="comment-avatar">
+							<strong> {{notif.content}}</strong>
+							<i class="fa fa-close moment-menu" ng-click="DeleteNotifictaion(notif.id)"></i>
+							<small>{{notif.time_since}}</small>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

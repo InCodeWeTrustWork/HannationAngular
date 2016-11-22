@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'Lato-Hairline';
+  src: url('../fonts/Lato-Hairline.eot');
+  src: url('../fonts/Lato-Hairline?#iefix') format('embedded-opentype'), url('../fonts/Lato-Hairline.ttf') format('truetype'), url('../fonts/Lato-Hairline.svg#Lato-Hairline') format('svg');
+}
+body {
+  background-color: #2e3138;
+  font-family: 'Lato-Hairline';
+  color: #fff;
+}
+.navbar {
+  background-color: #ffffff;
+  border: none;
+}
+.full_button {
+  display: inline-block;
+  padding: 0.575rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 100%;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: #d23232;
+}
+.full_button:hover {
+  color: #fff;
+  background-color: #fd5854;
+  /* border-bottom: 3px solid #000; */
+  box-shadow: none;
+  transition: .2s;
+  -webkit-box-shadow: 0px 0px 24px 0px #000;
+  -moz-box-shadow: 0px 0px 24px 0px #000000;
+  box-shadow: 0px 0px 24px 0px #000;
+}
+.card {
+  background: #ffffff;
+}
+.singlepost {
+  margin-top: 100px;
+}
+.card-block {
+  padding: 20px;
+}
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.event-info {
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 1, 0.1);
+  -moz-box-shadow: 0 0 3px rgba(0, 0, 1, 0.1);
+  box-shadow: 0 0 3px rgba(0, 0, 1, 0.1);
+  border-radius: 2px;
+  background-color: #23252b;
+  margin-bottom: 25px;
+}
+.event-info i {
+  font-size: 17px;
+  margin-right: 5px;
+}
+.event-info h2 {
+  font-size: 19px;
+  padding: 8px;
+}
+.event-info-header {
+  border-bottom: 1px solid #ebedf0;
+  background-color: #fafbfc;
+  text-align: -webkit-left;
+}
+.event-info-block i {
+  margin-right: 5px;
+}
+.event-info-block ul li {
+  list-style-type: none;
+  color: #fff;
+  line-height: 22px;
+  font-weight: 700;
+  padding: 10px;
+  display: block;
+  text-align: -webkit-left;
+  text-transform: uppercase;
+  margin: 0;
+}
+

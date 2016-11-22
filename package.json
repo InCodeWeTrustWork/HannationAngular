@@ -1,0 +1,23 @@
+{
+  "name": "hannation-angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "node-static": "^0.7.8",
+    "lodash": "^4.17.2",
+    "wilddog": "^2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://InCodeWeTrustCn@bitbucket.org/InCodeWeTrustCn/hannation-angular.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/InCodeWeTrustCn/hannation-angular#readme"
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+
+    <title>Hannation Angular JS</title>
+
+
+    <!-- bootstrap css -->
+    <link href="app-helpers/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- application css -->
+    <link href="app-content/app.css" rel="stylesheet" />
+    <link href="app-helpers/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="app-helpers/css/animate.css" rel="stylesheet" />
+
+</head>
+<body>
+    <!-- main app container -->
+
+    <nav class="navbar navbar-dark bg-inverse">
+
+    <div class="nav navbar-nav">
+    <a class="nav-item nav-link" href="#/">Home</a>
+    <a class="nav-item nav-link" href="#/profile">Profile</a>
+    <a class="nav-item nav-link" href="#/daylife">Daylife</a>
+    <a class="nav-item nav-link" href="#/nightlife">Nightlife</a>
+    <a class="nav-item nav-link" href="#/events">Events</a>
+    <a class="nav-item nav-link" href="#/guides">Guides</a>
+  </div>
+  
+    </nav>
+    <!-- main app container -->
+
+    
+           
+                <ui-view></ui-view>
+            
+
+   
+    <!--qiniu-->
+    <script src="app-helpers/js/CryptoJS.js"></script>
+    <script src="app-helpers/js/qiniu.js"></script>
+    <script src="app-helpers/js/plupload.full.min.js"></script>
+   
+    <!-- angular scripts -->
+    <script src="app-helpers/js/angular.min.js"></script>
+    <script src="app-helpers/js/angular-sanitize.min.js"></script>
+    <script src="app-helpers/js/angular-messages.min.js"></script>
+    <script src="app-helpers/js/angular-ui-router.min.js"></script>
+    <script src="app-helpers/js/ngStorage.min.js"></script>
+
+    <!-- application service -->
+    <script src="app.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/services.js"></script>
+    <script src="app-services/profile-services.js"></script>
+    <script src="app-services/image-service.js"></script>
+
+    <!-- controllers -->
+    <script src="home/index.controller.js"></script>
+    <script src="home/places/day/DayCtrl.js"></script>
+    <script src="home/places/night/NightCtrl.js"></script>
+    <script src="home/events/EventCtrl.js"></script>
+    <script src="home/profile/ProfileCtrl.js"></script>
+    <script src="home/profile/friend/FriendCtrl.js"></script>
+    <script src="home/profile/friends/FriendsCtrl.js"></script>
+    <script src="home/profile/notify/notifyCtrl.js"></script>
+    <script src="home/guides/GuideCtrl.js"></script>
+    <script src="app-helpers/filters.js"></script>
+    <script src="login/index.controller.js"></script>
+
+        
+    <!-- ui library --> 
+    <script src="app-helpers/js/lodash.js"></script>
+    <script src="app-helpers/js/jquery.min.js"></script>
+    <script src="app-helpers/js/tether.min.js"></script>
+    <script src="app-helpers/js/bootstrap.min.js"></script>   
+
+
+</body>
+</html>
