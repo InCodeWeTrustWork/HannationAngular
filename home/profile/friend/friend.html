@@ -12,11 +12,13 @@
 		  	 	<h5>{{count}}</h5>
 	  	 	</li>
 	  	 </ul>
-	  	 <div class="friendship" style="display:">
-	  	 <button class="btn" ng-click="Follow()">Follow</button>
-	  	 <button class="btn" ng-click="AddToFriend(friend)">Add to friend</button>
-	  	 <button class="btn" ng-click="Unfollow()">Unfollow</button>
-	  	 <button class="btn" ng-click="Unfriend()">Unfollow</button>
+	  	 <div class="friendship">
+
+
+	<button class="btn btn-primary btn-sm" ng-hide="toggle" ng-click="toggle = !toggle; AddToFriend(user.id)">Add </span>
+    <button class="btn btn-primary btn-sm" ng-show="toggle" ng-click="CancelFriend(user.id); toggle = !toggle">Cancel</span>
+	 
+	    <div class="clearfix"></div>
 	  	 </div>
 	  </div>
 	</div>

@@ -52,40 +52,37 @@
 
       //функции
 
-        $scope.AddToFriend = function() {
-            AuthService.AddToFriend(user_id, $stateParams.user_id).
-            then(function(data){
-                console.log('data', data);
-            });
-        }
-
-
-      $scope.remove = function(user_id){
-        
-        $http.jsonp('http://hannation.me/api/userplus/friends_remove_friend/', {
+      $scope.AddToFriend = function(id){
+        $http.jsonp('http://hannation.me/api/userplus/friends_add_friend/', {
           params: {
             key: '57f211a0354d7',
             cookie: $localStorage.currentUser.cookie,
-            friend_id: user_id
+            friend_id: id,
+            callback: "JSON_CALLBACK"
           }
         }).then(function(response){
-          console.log('response data', response.data);
-          console.log(user_id)
-        }); 
-    }
-
-      $scope.AddToFriend = function(){
-        $http.get('http://hannation.me/api/userplus/friends_add_friend/', {
-          params: {
-            key: '57f211a0354d7',
-            cookie: user.cookie,
-            friend_id: $stateParams.user_id
-          }
-        }).then(function(response){
-          console.log('response data', response.data);
-          console.log($stateParams.userId);
+          console.log('response data', response.status);
+          console.log('they are',response.data);
         });
     }
+
+    
+    $scope.CancelFriend = function(id){
+        $http.jsonp('http://hannation.me/api/userplus/friends_withdraw_friendship/', {
+          params: {
+            key: '57f211a0354d7',
+            cookie: $localStorage.currentUser.cookie,
+            friend_id: id,
+            callback: "JSON_CALLBACK"
+          }
+        }).then(function(response){
+          console.log('response data', response.status);
+          console.log('Canceled',response.data);
+        });
+    }
+
+
+
 
 
 // Add to favorite 
