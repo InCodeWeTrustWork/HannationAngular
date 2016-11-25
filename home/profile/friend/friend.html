@@ -14,9 +14,15 @@
 	  	 </ul>
 	  	 <div class="friendship">
 
+	<button class="btn btn-primary btn-sm" ng-show="response == 'awaiting_response'" ng-click="accept()">Accept</button>
+	<button class="btn btn-primary btn-sm" ng-show="response == 'awaiting_response'" ng-click="reject()">Reject</button>
+	<button class="btn btn-primary btn-sm" ng-show="response == 'is_friend'" ng-click="RemoveFromFriends(user.id)">Remove from friends</button>
 
-	<button class="btn btn-primary btn-sm" ng-hide="toggle" ng-click="toggle = !toggle; AddToFriend(user.id)">Add </span>
-    <button class="btn btn-primary btn-sm" ng-show="toggle" ng-click="CancelFriend(user.id); toggle = !toggle">Cancel</span>
+
+	<button class="btn btn-primary btn-sm" ng-hide="toggle || response == 'awaiting_response' || response == 'pending' || response == 'is_friend'"  ng-show="response == 'not_friends'" ng-click="toggle = !toggle; AddToFriend(user.id)">Add to friend</button>
+
+
+    <button class="btn btn-primary btn-sm" ng-show="toggle || response == 'pending'" ng-click="CancelFriendRequest(user.id); toggle = !toggle">Cancel Request</button>
 	 
 	    <div class="clearfix"></div>
 	  	 </div>
@@ -25,7 +31,7 @@
 
 
 	<div class="card">
-		<h5 style="font-size: 14px;">About <small>· edit</small></h5>
+		<h5 style="font-size: 14px;">About</h5>
 		<ul>
 		<li class="fullname">{{user_meta.first_name}}</li>
 		<li class="location">{{user_meta.city}}</li>
@@ -62,7 +68,7 @@
 						<img class="comment-avatar" ng-src="{{comment.avatar}}">
 						</a>
 						<p class="comment-moment">
-							<strong>{{activity.user.display_name}} :</strong>  {{comment.content}}
+							<strong>{{comment.display_name}} :</strong>  {{comment.content}}
 						</p>
 					</li>
 				</ul>

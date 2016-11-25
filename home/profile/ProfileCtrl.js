@@ -36,14 +36,18 @@
         });
 
 
+        AuthService.NotificationCount()
+            .then(function(data){
+                $scope.countnot = data.count;
+                console.log('This not', data);
+            })
+
         AuthService.GetNotificationsNew()
             .then(function(data){
                 $scope.newnotifications = data.notifications;
               console.log('You Have this new notification', data.newnotifications);
         });
     
-
-
         //Add activity
 
         $scope.AddMoment = function() {
@@ -177,10 +181,61 @@
                $scope.email_edit = false;
                $scope.phone_edit = false;
                $scope.edit = false;
-                 $scope.notify = false;
+                $scope.notify = false;
+                 $scope.page = 'default';
              });
         });
     };
+
+
+         //Подтверждение дружбы
+        $scope.accept = function(item_id) {
+             AuthService.GetFriendshipId(item_id)
+             .then(function(data) {
+             //Добавляем в друзья
+             $http.jsonp("http://hannation.me/api/userplus/friends_accept_friendship/", {
+                        params: {
+                          key: '57f211a0354d7',
+                          cookie: $localStorage.currentUser.cookie,
+                          user_id: item_id,
+                          friendship_id: data.response,
+                          callback: "JSON_CALLBACK"
+                  }
+               }).then(function(response){
+                    //Get friends request
+                  AuthService.GetFriendsNotifications()
+                      .then(function(data){
+                        $scope.notifications = data.notifications;
+                        console.log('We have this requests', data);
+                  });
+            })            
+           });
+        } 
+
+          //Подтверждение дружбы
+        $scope.reject = function(item_id) {
+             AuthService.GetFriendshipId(item_id)
+             .then(function(data) {
+             //Добавляем в друзья
+             $http.jsonp("http://hannation.me/api/userplus/friends_reject_friendship/", {
+                        params: {
+                          key: '57f211a0354d7',
+                          cookie: $localStorage.currentUser.cookie,
+                          user_id: item_id,
+                          friendship_id: data.response,
+                          callback: "JSON_CALLBACK"
+                  }
+               }).then(function(response){
+                    //Get friends request
+                  AuthService.GetFriendsNotifications()
+                      .then(function(data){
+                        $scope.notifications = data.notifications;
+                        console.log('Friendship rejected', data);
+                  });
+            })            
+           });
+        } 
+
 
     $scope.back = function() {
         $scope.notify = false;
@@ -192,6 +247,16 @@
             .then(function(data){
               $scope.notifications = data.notifications;
               console.log('You Have this all notification', data.notifications);
+            $timeout(function () { 
+                $scope.out = true;
+                console.log('Waste your time');
+                $scope.animate = 'animated fadeOut';
+                 }, 5000);
+            $timeout(function () { 
+                $scope.animate = 'animated fadeOut';
+                 }, 4000);
+
+
         });
 
 

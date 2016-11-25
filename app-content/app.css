@@ -14,7 +14,24 @@ font-family:'B-Light';
 }
 
 
+.badge {
+  display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #8e3dfe;
+    border-radius: 10px;
+}
 
+.logo {
+  width: 140px;
+}
 
 .help-block {
     font-size: 12px;
@@ -335,4 +352,7 @@ body {
   border:none;
   color: #fff;
   transition: all .2s;
+}
+.button-block {
+   margin-top: 20px;
 }

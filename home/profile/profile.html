@@ -2,32 +2,36 @@
 	<div class="col-md-3">
 		<div class="text-xs-center profile-block">
 		  <img class="card-img-top"  ng-src="http://localhost:8080/home/profile/iceland.jpg" alt="Card image cap">
-		  <img class="avatar" ng-src="{{user.avatar}}" ng-click="back()">
+		  <img ng-click="page=default" class="avatar" ng-src="{{user.avatar}}" >
 		  <div class="bottom">
 		  	 <h5>{{user.displayname}}</h5>
 		  	 <p>{{user.description}}</p>
 		  	 <ul>
 		  	 	<li> 
-			  	 	<a href="#/friends">Friends</a>
+		  	 	<a ng-click="page='friends'">Friends</a>
 			  	 	<h5>{{count}}</h5>
 		  	 	</li>
 		  	 </ul>
 		  </div>
 		</div>
+		<div class="card">	
+				<a ng-click="page='not'"><i class="fa fa-bell-o" aria-hidden="true"></i>  Notifications  <span class="badge">{{countnot}}</span></a>
+		</div>
 		<div class="card">
+		
 		<h5 style="font-size: 14px;">About ·     
 			<label class="btn-menu">
-	    	<input class="settings_input btn btn-primary btn-sm" type="checkbox" checked autocomplete="off" ng-model='edit'> 
+	    	<input class="settings_input btn btn-primary btn-sm" type="checkbox" checked autocomplete="off" ng-click="page='settings'"> 
 	    	<i class="fa fa-cog"></i>
 			    </label>   
 			    </h5>
 			<ul>
-			<li class="fullname">{{info.name}}</li>
-			<li class="location">{{info.city}}</li>
-			<li class="wechat">{{info.wechat}}</li>
-			<li class="email">{{info.email}}</li>
-			<li class="birthday">{{info.birthday}}</li>
-			<li class="phone">{{info.phone}}</li>
+			<li class="fullname animated pulse">{{info.name}}</li>
+			<li class="location animated pulse">{{info.city}}</li>
+			<li class="wechat animated pulse">{{info.wechat}}</li>
+			<li class="email animated pulse">{{info.email}}</li>
+			<li class="birthday animated pulse">{{info.birthday}}</li>
+			<li class="phone animated pulse">{{info.phone}}</li>
 			</ul>
 		</div>
 	</div>
@@ -37,7 +41,8 @@
 
 
 	<div class="col-md-6">
-		<div class="card animated fadeIn" style="padding: 0;" ng-hide="edit || notify">
+		<div ng-switch on="page">
+		<div class="card animated fadeIn" style="padding: 0;" ng-hide="edit" ng-switch-default >
 			<div class="add-new-moment">
 				<div class="form-group">
 				  <div class="input-group" layout id="uploader">
@@ -90,8 +95,27 @@
 				</div>
 			</div>
 		</div>
+	
+		<div class="card" style="padding: 0;" ng-switch-when="friends">
+			<ul class="list-group" >
+				<li class="notif-header">
+					<h3 class="alc"><i class="fa fa-users"></i> Friends</h3>
+				</li>
+				<li class="notify" ng-repeat="friend in friends">
+					<a href="#/friend/{{friend.user_id}}">
+						<img ng-src="{{friend.avatar}}" class="comment-avatar">
+					</a>
+							<strong> {{friend.username}} </strong>
+							<i class="fa fa-close moment-menu" ng-click="DeleteNotifictaion(notif.id)"></i>
+							<small>{{notif.time_since}}</small>
+				</li>
+			
+			</ul>
+		</div>
+	
+
 <!-- Setting start -->
-<div class="card animated fadeIn" ng-hide='!edit'>
+<div class="card animated fadeIn" ng-switch-when="settings">
 	<form >
 	  <div class="form-group">
 	    <p>Name: {{info.name}}</p> 
@@ -104,7 +128,7 @@
 			<div class="input-group" ng-hide="!name_edit">
 		      <input type="text" class="form-control" id="formGroupExampleInput2" ng-model='name'>
 		      <span class="input-group-btn">
-		      	<button class="btn btn-secondary" type="button" ng-click="save_settings()">Go!</button>
+		      	<button class="btn btn-secondary" type="button" ng-click="save_settings(); page=default">Go!</button>
 		      </span>
 		    </div>
 	  </div>
@@ -117,7 +141,7 @@
 			<div class="input-group"  ng-hide="!city_edit">		      
 		      <input type="text" class="form-control" id="formGroupExampleInput2" ng-model='city' placeholder="{{city}}">
 		      <span class="input-group-btn">		      
-		        <button class="btn btn-secondary" type="button" ng-click="save_settings()">Go!</button>
+		        <button class="btn btn-secondary" type="button" ng-click="save_settings();">Go!</button>
 		      </span>
 		    </div>
 	  </div>
@@ -130,7 +154,7 @@
 			<div class="input-group"  ng-hide="!birthday_edit">		      
 		      <input type="text" class="form-control" id="formGroupExampleInput2" ng-model='birthday' placeholder="{{birthday}}">
 		      <span class="input-group-btn">		      
-		        <button class="btn btn-secondary" type="button" ng-click="save_settings()">Go!</button>
+		        <button class="btn btn-secondary" type="button" ng-click="save_settings(); page=default">Go!</button>
 		      </span>
 		    </div>
 	  </div>
@@ -143,7 +167,7 @@
 			<div class="input-group"  ng-hide="!phone_edit">		      
 		      <input type="text" class="form-control" id="formGroupExampleInput2" ng-model='phone' placeholder="{{phone}}">
 		      <span class="input-group-btn">		      
-		        <button class="btn btn-secondary" type="button" ng-click="save_settings()">Go!</button>
+		        <button class="btn btn-secondary" type="button" ng-click="save_settings(); page=default">Go!</button>
 		      </span>
 		    </div>
 	  </div>
@@ -156,7 +180,7 @@
 			<div class="input-group"  ng-hide="!wechat_edit">		      
 		      <input type="text" class="form-control" id="formGroupExampleInput2" ng-model='wechat' placeholder="{{wechat}}">
 		      <span class="input-group-btn">		      
-		        <button class="btn btn-secondary" type="button" ng-click="save_settings()">Go!</button>
+		        <button class="btn btn-secondary" type="button" ng-click="save_settings(); page=default">Go!</button>
 		      </span>
 		    </div>
 	  </div>
@@ -170,22 +194,23 @@
 			<div class="input-group"  ng-hide="!email_edit">		      
 		      <input type="text" class="form-control" id="formGroupExampleInput2" ng-model='email' placeholder="{{email}}">
 		      <span class="input-group-btn">		      
-		        <button class="btn btn-secondary" type="button" ng-click="save_settings()">Go!</button>
+		        <button class="btn btn-secondary" type="button" ng-click="save_settings(); page=default">Go!</button>
 		      </span>
 		    </div>
 	  </div>
 
 	  <div class="form-group">
-	  	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="save_settings()">Save</button>
+	  	<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="save_settings(); page=default">Save</button>
 	   </div>
 	</form>
-</div>
+	</div>
+
 <!--Settings end --> 
 
 
 <!-- Start Notifications  --> 
-<div class="card" style="padding: 0;" ng-hide='!notify' >
-			<ul class="list-group" >
+	<div class="card" style="padding: 0;" ng-switch-when="not">
+			<ul class="list-group">
 				<li class="notif-header">
 					<h3 class="alc">Notifications</h3>
 				</li>
@@ -196,20 +221,20 @@
 							<small>{{notif.time_since}}</small>
 				</li>
 			</ul>
-		</div>
 	</div>
 
 
+	</div>
 
 
-
+</div>
 
 
 
 <!-- notif start-->
 <div class="col-md-3">
-	<div class="notification" ng-model="notificat" ng-hide="notificat">
-				<div class="alert alert-success" role="alert" ng-repeat="notif in newnotifications" ng-click="notif_show() ">
+	<div class="notification {{animate}}" ng-hide="out" >
+				<div class="alert alert-success" role="alert" ng-repeat="notif in newnotifications" ng-click="notif_show()">
 				 <img ng-src="{{notif.sender_avatar}}" alt="" style="width: 30px; border-radius: 100%;">  {{notif.content}}
 				 <br>
 				  <small>{{notif.time_since}}</small>
@@ -218,3 +243,4 @@
 		<div class="clearfix"></div>
 	</div>
 </div>
+

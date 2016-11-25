@@ -6,22 +6,21 @@
         .controller('FriendCtrl', Controller);
 
     function Controller($scope, AuthService, $http, $localStorage, QiNiu, $stateParams) {
+        //Variables
         var vm = this;
-      var user_id = $stateParams.user_id;
-        // User Info 
+        var user_id = $stateParams.user_id;
+ 
+        //User info
         AuthService.GetFriendInfo(user_id)
             .then(function(data) {
             $scope.user = data;
         });
-
 
         AuthService.GetFriendMeta(user_id)
         .then(function(data) {
             $scope.user_meta = data;
             $scope.user_id = $stateParams.user_id;
         });
-
-
 
         AuthService.GetFriendMoments(user_id)
         .then(function(data) {
@@ -31,61 +30,104 @@
             console.log('GetFriend Momemts:', data.activities);
         });
 
-
-
-        $http.jsonp('http://hannation.me/api/userplus/friends_check_friendship/', {
-            params: {
-                key: '57f211a0354d7',
-                friend_id: $stateParams.user_id,
-                user_id: $localStorage.currentUser.id,
-                callback: "JSON_CALLBACK"
-               
-            }
-        }).then(function(response){
-          $scope.friendship = response.data;
-          console.log('response data', response.data);
-        })
-
-
-
-
-
-      //функции
-
-      $scope.AddToFriend = function(id){
-        $http.jsonp('http://hannation.me/api/userplus/friends_add_friend/', {
-          params: {
-            key: '57f211a0354d7',
-            cookie: $localStorage.currentUser.cookie,
-            friend_id: id,
-            callback: "JSON_CALLBACK"
-          }
-        }).then(function(response){
-          console.log('response data', response.status);
-          console.log('they are',response.data);
+        //User relations
+        AuthService.FriendStatus(user_id)
+        .then(function(data) {
+           $scope.response = data.response;
+            console.log('FRIEND STATUS IS', data.response);
         });
-    }
 
-    
-    $scope.CancelFriend = function(id){
-        $http.jsonp('http://hannation.me/api/userplus/friends_withdraw_friendship/', {
-          params: {
-            key: '57f211a0354d7',
-            cookie: $localStorage.currentUser.cookie,
-            friend_id: id,
-            callback: "JSON_CALLBACK"
-          }
-        }).then(function(response){
-          console.log('response data', response.status);
-          console.log('Canceled',response.data);
+        AuthService.GetFriendshipId(user_id)
+        .then(function(data) {
+           $scope.ffid = data.response;
         });
-    }
+
+        AuthService.CheckFriendShip(user_id)
+        .then(function(data) {
+           $scope.response = data.response;
+            console.log('Friendship checked', data.response);
+        });
+
+        $scope.AddToFriend = function(){
+            AuthService.AddToFriend(user_id)
+            .then(function(data){
+                console.log('Friendship request sended');
+            });
+        }
+
+        $scope.RemoveFromFriends = function(){
+            AuthService.RemoveFromFriends(user_id)
+            .then(function(data){
+                console.log('You no more Friends');
+                 AuthService.FriendStatus(user_id)
+                    .then(function(data) {
+                       $scope.response = data.response;
+                        console.log('FRIEND STATUS IS', data);
+                    });
+            });
+        }
+
+        $scope.CancelFriendRequest = function(){
+            AuthService.RemoveFrienRequest(user_id)
+            .then(function(data){
+                console.log('Friendship Request Canceled');
+                AuthService.FriendStatus(user_id)
+                    .then(function(data) {
+                       $scope.response = data.response;
+                        console.log('FRIEND STATUS IS', data);
+                    });
+            });
+        }
+
+       //Accept Friendship Request
+        $scope.accept = function() {
+             AuthService.GetFriendshipId(user_id)
+             .then(function(data) {
+             $http.jsonp("http://hannation.me/api/userplus/friends_accept_friendship/", {
+                        params: {
+                          key: '57f211a0354d7',
+                          cookie: $localStorage.currentUser.cookie,
+                          user_id: user_id,
+                          friendship_id: data.response,
+                          callback: "JSON_CALLBACK"
+                  }
+               }).then(function(response){
+                  AuthService.FriendStatus(user_id)
+                    .then(function(data) {
+                       $scope.response = data.response;
+                        console.log('FRIEND STATUS IS', data);
+                    });
+                 console.log('They are friends and they number of friends equal to', data.response)
+            })            
+           });
+        } 
+
+       //Reject Friendship Request
+        $scope.reject = function() {
+             AuthService.GetFriendshipId(user_id)
+             .then(function(data) {
+             $http.jsonp("http://hannation.me/api/userplus/friends_reject_friendship/", {
+                        params: {
+                          key: '57f211a0354d7',
+                          cookie: $localStorage.currentUser.cookie,
+                          user_id: user_id,
+                          friendship_id: data.response,
+                          callback: "JSON_CALLBACK"
+                  }
+               }).then(function(response){
+                 console.log('You rejected friends', data.response);
+                  AuthService.FriendStatus(user_id)
+                      .then(function(data) {
+                         $scope.response = data.response;
+                          console.log('FRIEND STATUS IS', data);
+                  });
+            })            
+           });
+        } 
 
 
 
-
-
-// Add to favorite 
+// Relation with friend's moments
     
 
         $scope.Add2Favorite = function(activity_id) {

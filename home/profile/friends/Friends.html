@@ -39,8 +39,24 @@
 							<i class="fa fa-close moment-menu" ng-click="DeleteNotifictaion(notif.id)"></i>
 							<small>{{notif.time_since}}</small>
 				</li>
+				<li class="notif-header">
+					<h3 class="alc"><i class="fa fa-users"></i> Requests</h3>
+				</li>
+					<li class="notify" ng-repeat="notif in notifications" ng-if="notif.component_action == 'friendship_request'">
+					<img ng-src="{{notif.sender_avatar}}" class="comment-avatar">
+							<strong ng-if="notif.status == 'pending'"> {{notif.content}}</strong>
+							<strong ng-if="notif.status == 'is_friend'"> You allready friends</strong>
+							<strong ng-if="notif.status == 'not_friends'"> Friendship rejected </strong>
+							<i class="fa fa-close moment-menu" ng-click="DeleteNotifictaion(notif.id)"></i>
+							<small>{{notif.time_since}}</small>
+						<div class="button-block" ng-if="notif.status == 'pending'">
+							<button class="btn btn-primary btn-sm"  ng-click="accept(notif.item_id)">Accept</button>
+							<button class="btn btn-primary btn-sm"  ng-click="reject(notif.item_id)">Reject</button>
+						</div>
+				</li>
 			</ul>
 		</div>
+
 	</div>
 </div>
 

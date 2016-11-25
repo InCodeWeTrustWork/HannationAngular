@@ -38,6 +38,10 @@
 							<strong> {{notif.content}}</strong>
 							<i class="fa fa-close moment-menu" ng-click="DeleteNotifictaion(notif.id)"></i>
 							<small>{{notif.time_since}}</small>
+					<div class="button-block" ng-if="notif.status == 'pending'">
+							<button class="btn btn-primary btn-sm"  ng-click="accept(notif.item_id)">Accept</button>
+							<button class="btn btn-primary btn-sm"  ng-click="reject(notif.item_id)">Reject</button>
+					</div>
 				</li>
 			</ul>
 		</div>
